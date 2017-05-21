@@ -47,6 +47,11 @@ namespace CameraUploadsOrganizer
 
             var archivePath = Path.Combine(cameraUploadsPath, "archive");
 
+            if (!Directory.Exists(archivePath))
+            {
+                Directory.CreateDirectory(archivePath);
+            }
+
             var files = Directory.GetFiles(cameraUploadsPath);
 
             foreach (var originalFilePath in files)
