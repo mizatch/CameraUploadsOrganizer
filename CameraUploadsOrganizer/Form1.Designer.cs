@@ -36,6 +36,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.fbdPhotosFolder = new System.Windows.Forms.FolderBrowserDialog();
+            this.lblSelectedUploadsLocation = new System.Windows.Forms.Label();
+            this.lblSelectedPhotosLocation = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -60,16 +62,16 @@
             // lblCameraUploadsLocation
             // 
             this.lblCameraUploadsLocation.AutoSize = true;
-            this.lblCameraUploadsLocation.Location = new System.Drawing.Point(96, 175);
+            this.lblCameraUploadsLocation.Location = new System.Drawing.Point(96, 379);
             this.lblCameraUploadsLocation.Name = "lblCameraUploadsLocation";
             this.lblCameraUploadsLocation.Size = new System.Drawing.Size(0, 37);
             this.lblCameraUploadsLocation.TabIndex = 2;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(698, 296);
+            this.button1.Location = new System.Drawing.Point(698, 588);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(304, 76);
+            this.button1.Size = new System.Drawing.Size(304, 78);
             this.button1.TabIndex = 3;
             this.button1.Text = "Organize Photos";
             this.button1.UseVisualStyleBackColor = true;
@@ -78,7 +80,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(89, 189);
+            this.label2.Location = new System.Drawing.Point(89, 393);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(217, 37);
             this.label2.TabIndex = 4;
@@ -86,19 +88,37 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(698, 170);
+            this.button2.Location = new System.Drawing.Point(698, 374);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(304, 74);
+            this.button2.Size = new System.Drawing.Size(304, 76);
             this.button2.TabIndex = 5;
             this.button2.Text = "Select Folder";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // lblSelectedUploadsLocation
+            // 
+            this.lblSelectedUploadsLocation.AutoSize = true;
+            this.lblSelectedUploadsLocation.Location = new System.Drawing.Point(150, 201);
+            this.lblSelectedUploadsLocation.Name = "lblSelectedUploadsLocation";
+            this.lblSelectedUploadsLocation.Size = new System.Drawing.Size(0, 37);
+            this.lblSelectedUploadsLocation.TabIndex = 6;
+            // 
+            // lblSelectedPhotosLocation
+            // 
+            this.lblSelectedPhotosLocation.AutoSize = true;
+            this.lblSelectedPhotosLocation.Location = new System.Drawing.Point(150, 496);
+            this.lblSelectedPhotosLocation.Name = "lblSelectedPhotosLocation";
+            this.lblSelectedPhotosLocation.Size = new System.Drawing.Size(0, 37);
+            this.lblSelectedPhotosLocation.TabIndex = 7;
+            // 
             // Organizer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(19F, 37F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1103, 401);
+            this.ClientSize = new System.Drawing.Size(1103, 724);
+            this.Controls.Add(this.lblSelectedPhotosLocation);
+            this.Controls.Add(this.lblSelectedUploadsLocation);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button1);
@@ -123,6 +143,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.FolderBrowserDialog fbdPhotosFolder;
+        private System.Windows.Forms.Label lblSelectedUploadsLocation;
+        private System.Windows.Forms.Label lblSelectedPhotosLocation;
     }
 }
 

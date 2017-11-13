@@ -36,7 +36,12 @@ namespace CameraUploadsOrganizer
 
         private void btnOpenUploadsDialog_Click(object sender, EventArgs e)
         {
-            fbdUploadsFolder.ShowDialog();
+            DialogResult result = fbdUploadsFolder.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                lblSelectedUploadsLocation.Text = fbdUploadsFolder.SelectedPath;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -175,6 +180,13 @@ namespace CameraUploadsOrganizer
 
         public static bool CanGetDateFromImage(string path)
         {
+            var extension = Path.GetExtension(path);
+
+            if (extension == ".heic")
+            {
+                return false;
+            }
+
             using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read))
             using (var myImage = Image.FromStream(fs, false, false))
             {
@@ -195,7 +207,12 @@ namespace CameraUploadsOrganizer
 
         private void button2_Click(object sender, EventArgs e)
         {
-            fbdPhotosFolder.ShowDialog();
+            var result = fbdPhotosFolder.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                lblSelectedPhotosLocation.Text = fbdUploadsFolder.SelectedPath;
+            }
         }
     }
 }
