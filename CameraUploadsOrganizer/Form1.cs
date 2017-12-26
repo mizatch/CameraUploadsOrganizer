@@ -93,7 +93,7 @@ namespace CameraUploadsOrganizer
                 }
                 else
                 {
-                    continue;
+                    dateTaken = File.GetCreationTime(originalFilePath);
                 }
 
                 var newFolderName = dateTaken.ToString("yyyy-MM-dd");
@@ -119,7 +119,7 @@ namespace CameraUploadsOrganizer
 
         private bool IsFileAMovie(string filePath)
         {
-            var extension = Path.GetExtension(filePath);
+            var extension = Path.GetExtension(filePath.ToLower());
 
             return extension == ".mov" || extension == ".mp4";
         }
