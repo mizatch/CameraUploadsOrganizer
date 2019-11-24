@@ -38,6 +38,7 @@
             this.fbdPhotosFolder = new System.Windows.Forms.FolderBrowserDialog();
             this.lblSelectedUploadsLocation = new System.Windows.Forms.Label();
             this.lblSelectedPhotosLocation = new System.Windows.Forms.Label();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // label1
@@ -112,6 +113,10 @@
             this.lblSelectedPhotosLocation.Size = new System.Drawing.Size(0, 37);
             this.lblSelectedPhotosLocation.TabIndex = 7;
             // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            // 
             // Organizer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(19F, 37F);
@@ -145,6 +150,7 @@
         private System.Windows.Forms.FolderBrowserDialog fbdPhotosFolder;
         private System.Windows.Forms.Label lblSelectedUploadsLocation;
         private System.Windows.Forms.Label lblSelectedPhotosLocation;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 

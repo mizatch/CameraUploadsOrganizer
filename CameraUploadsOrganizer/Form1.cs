@@ -16,7 +16,8 @@ namespace CameraUploadsOrganizer
 
         private readonly List<string> _ignoredFiles = new List<string>
         {
-            ".dropbox"
+            ".dropbox",
+            ".lnk"
         };
 
         private readonly List<string> _ignoredExtensions = new List<string>
@@ -27,11 +28,13 @@ namespace CameraUploadsOrganizer
         public Organizer()
         {
             InitializeComponent();
+            InitializeBackgroundWorker();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            backgroundWorker1.WorkerReportsProgress = false;
+            backgroundWorker1.WorkerSupportsCancellation = false;
         }
 
         private void btnOpenUploadsDialog_Click(object sender, EventArgs e)
@@ -45,6 +48,16 @@ namespace CameraUploadsOrganizer
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+            Cursor = Cursors.WaitCursor;
+
+            if (backgroundWorker1.IsBusy != true)
+            {
+                backgroundWorker1.RunWorkerAsync();
+            }
+        }
+               
+        private void OrganizePhotos()
         {
             var photosFolder = fbdPhotosFolder.SelectedPath;
 
@@ -103,18 +116,20 @@ namespace CameraUploadsOrganizer
                     Directory.CreateDirectory(Path.Combine(photosFolder, newFolderName));
                 }
 
-                var newFilePath = Path.Combine(photosFolder, newFolderName, fileName);
+                var newFileFullPath = Path.Combine(photosFolder, newFolderName, fileName);
 
-
-                if (!File.Exists(newFilePath))
+                if (!File.Exists(newFileFullPath))
                 {
-                    File.Copy(originalFilePath, newFilePath, false);
+                    File.Copy(originalFilePath, newFileFullPath, false);
                 }
 
-                File.Move(originalFilePath, Path.Combine(archivePath, fileName));
+                var archiveFullPath = Path.Combine(archivePath, fileName);
 
+                if (!File.Exists(archiveFullPath))
+                {
+                    File.Move(originalFilePath, archiveFullPath);
+                }
             }
-
         }
 
         private bool IsFileAMovie(string filePath)
@@ -211,8 +226,25 @@ namespace CameraUploadsOrganizer
 
             if (result == DialogResult.OK)
             {
-                lblSelectedPhotosLocation.Text = fbdUploadsFolder.SelectedPath;
+                lblSelectedPhotosLocation.Text = fbdPhotosFolder.SelectedPath;
             }
+        }
+
+        private void InitializeBackgroundWorker()
+        {
+            backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(backgroundWorker1_DoWork);
+            backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(backgroundWorker1_RunWorkerCompleted);
+        }
+
+        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            OrganizePhotos();
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            Cursor = Cursors.Default;
+            MessageBox.Show("Done Organizing");
         }
     }
 }
